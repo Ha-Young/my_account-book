@@ -13,10 +13,11 @@ const AccountBookSelectCategoryBlock = styled.div`
 `;
 
 function AccountBookSelectCategory() {
+  const options = ['전체', '식사', '식료품', '교통', '생활', '의료'];
   return (
     <AccountBookSelectCategoryBlock>
       카테고리별로 보기:
-      <MySelectBox />
+      <MySelectBox options={options} value={options[0]} />
     </AccountBookSelectCategoryBlock>
   );
 }
