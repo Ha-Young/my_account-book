@@ -2,6 +2,7 @@ import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import AccountBookTemplate from './Components/AccountBookTemplate';
 import AccountBookHead from './Components/AccountBookHead';
+import AccountBookSelectCategory from './Components/AccountBookSelectCategory';
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -15,6 +16,7 @@ function App() {
       <GlobalStyle />
       <AccountBookTemplate>
         <AccountBookHead />
+        <AccountBookSelectCategory />
       </AccountBookTemplate>
     </>
   );

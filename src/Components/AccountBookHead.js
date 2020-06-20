@@ -1,28 +1,36 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const AccountBookHeadBlock = styled.div`
-  padding: 32px 48px 32px 24px;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid #adb5bd;
 
   h1 {
     margin: 0;
     font-size: 36px;
-    color: #343a40;
   }
 
   .date {
-    margin-top: 4px;
-    color: #868e96;
+    margin-top: 25px;
     font-size: 21px;
+    font-weight: bold;
   }
 
   .all-payment {
-    color: #ff8787;
-    font-size: 18px;
-    margin-top: 40px;
+    font-size: 21px;
+    margin-top: 20px;
+    margin-bottom: 25px;
     font-weight: bold;
   }
+`;
+
+const PaymentNum = styled.span`
+  margin-left: 5px;
+  color: #37b24d;
+  ${props =>
+    props.isMinus &&
+    css`
+      color: #f03e3e;
+    `}
 `;
 
 function AccountBookHead() {
@@ -30,7 +38,10 @@ function AccountBookHead() {
     <AccountBookHeadBlock>
       <h1>오늘의 지출</h1>
       <div className="date">2020년 6월 20일</div>
-      <div className="all-payment">총 지출: -139000 원</div>
+      <div className="all-payment">
+        총 지출:
+        <PaymentNum isMinus={false}>0 원</PaymentNum>
+      </div>
     </AccountBookHeadBlock>
   );
 }

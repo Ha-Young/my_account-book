@@ -16,6 +16,8 @@ const AccountBookTemplateBlock = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  padding: 50px;
 `;
 
 function AccountBookTemplate({ children }) {
