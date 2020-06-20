@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import MySelectBox from './MySelectBox';
 import MyButton from './MyButton';
@@ -46,6 +46,25 @@ const CircleButtton = styled.button`
       transform: rotate(45deg);
     `}
 `;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+`;
+
+const slideUp = keyframes`
+  from {
+    transform: translateY(200px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+`;
+
 const InsertFormPositioner = styled.div`
   position: fixed;
   left: 0;
@@ -63,6 +82,11 @@ const InsertFormPositioner = styled.div`
   h3 {
     margin: 0;
   }
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: ${fadeIn};
+  animation-fill-mode: forwards;
 `;
 
 const InsertForm = styled.form`
@@ -70,6 +94,11 @@ const InsertForm = styled.form`
   padding: 1.5rem;
   background: white;
   border-radius: 2px;
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: ${slideUp};
+  animation-fill-mode: forwards;
 `;
 
 const ButtonGroup = styled.div`
