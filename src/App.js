@@ -1,10 +1,22 @@
 import React from 'react';
+import { createGlobalStyle } from 'styled-components';
+import AccountBookTemplate from './Components/AccountBookTemplate';
+import AccountBookHead from './Components/AccountBookHead';
+
+const GlobalStyle = createGlobalStyle`
+  body{
+    background-color: #dee2e6;
+  }
+`;
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <>
+      <GlobalStyle />
+      <AccountBookTemplate>
+        <AccountBookHead />
+      </AccountBookTemplate>
+    </>
   );
 }
 
