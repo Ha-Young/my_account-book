@@ -12,8 +12,8 @@ const AccountBookSelectCategoryBlock = styled.div`
   font-weight: bold;
 `;
 
-function AccountBookSelectCategory() {
-  const options = ['전체', '식사', '식료품', '교통', '생활', '의료'];
+function AccountBookSelectCategory({ categorys }) {
+  const options = categorys.map(category => category.text);
   return (
     <AccountBookSelectCategoryBlock>
       카테고리별로 보기:

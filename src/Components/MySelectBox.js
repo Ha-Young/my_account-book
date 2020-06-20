@@ -75,11 +75,12 @@ function MySelectBox({ options, value }) {
         {selected} <MdExpandMore />
       </SelectBox>
       <OptionList listview={viewOption}>
-        {options.map((option, index) => (
-          <Option key={index} onClick={selectOption}>
-            {option}
-          </Option>
-        ))}
+        {options &&
+          options.map((option, index) => (
+            <Option key={index} onClick={selectOption}>
+              {option}
+            </Option>
+          ))}
       </OptionList>
     </MySelectBoxBlock>
   );
