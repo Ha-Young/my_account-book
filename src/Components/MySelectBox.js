@@ -102,7 +102,7 @@ function MySelectBox({
     setSelectedOption(selectedOptions);
     toggleViewOption();
     if (prevSelectedId !== selectedOptions.id) {
-      onSelectedChange(selectedOptions.id);
+      onSelectedChange && onSelectedChange(selectedOptions.id);
       prevSelectedId.current = selectedOptions.id;
     }
   };

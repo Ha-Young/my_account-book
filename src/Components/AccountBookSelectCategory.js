@@ -22,7 +22,7 @@ const AccountBookSelectCategoryBlock = styled.div`
 
 function AccountBookSelectCategory() {
   const categorys = useAccountBookCategory();
-  const [selectCategory, setSelectCategory] = useAccountBookSelectedCategory();
+  const [_, setSelectCategory] = useAccountBookSelectedCategory();
 
   const onSelectedChange = selectId => {
     setSelectCategory(selectId);

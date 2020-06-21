@@ -14,10 +14,7 @@ const AccountBookListBlock = styled.div`
 
 function AccountBookList() {
   const accountBooks = useAccountBookState();
-  const [
-    selectedCategory,
-    setSelectedCategory,
-  ] = useAccountBookSelectedCategory();
+  const [selectedCategory, _] = useAccountBookSelectedCategory();
 
   const filteredAccountBooks =
     selectedCategory === 0

@@ -47,7 +47,6 @@ const AccountBookDispatchContext = createContext();
 const AccountBookNextIdContext = createContext();
 const AccountBookCategoryContext = createContext();
 const AccountBookSelectCategoryContext = createContext();
-const AccountBookSetSelectCategoryContext = createContext();
 
 export function AccountBookProvider({ children }) {
   const [state, dispatch] = useReducer(accountBookReducer, initialAccountBooks);
