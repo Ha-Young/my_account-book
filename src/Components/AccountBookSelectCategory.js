@@ -13,11 +13,10 @@ const AccountBookSelectCategoryBlock = styled.div`
 `;
 
 function AccountBookSelectCategory({ categorys }) {
-  const options = categorys.map(category => category.text);
   return (
     <AccountBookSelectCategoryBlock>
       카테고리별로 보기:
-      <MySelectBox options={options} value={options[0]} />
+      <MySelectBox options={categorys} value={categorys[0]} />
     </AccountBookSelectCategoryBlock>
   );
 }
