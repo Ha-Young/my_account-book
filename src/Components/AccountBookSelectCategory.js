@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import MySelectBox from './MySelectBox';
+import { useAccountBookCategory } from './AccountBookContext';
 
 const AccountBookSelectCategoryBlock = styled.div`
   display: flex;
@@ -16,7 +17,9 @@ const AccountBookSelectCategoryBlock = styled.div`
   }
 `;
 
-function AccountBookSelectCategory({ categorys }) {
+function AccountBookSelectCategory() {
+  const categorys = useAccountBookCategory();
+
   return (
     <AccountBookSelectCategoryBlock>
       <span>카테고리별로 보기:</span>

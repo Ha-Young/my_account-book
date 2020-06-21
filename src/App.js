@@ -28,8 +28,8 @@ function App() {
       <GlobalStyle />
       <AccountBookTemplate>
         <AccountBookHead />
-        {/* <AccountBookSelectCategory />
-        <AccountBookList />
+        <AccountBookSelectCategory />
+        {/* <AccountBookList />
         <AccountBookCreate /> */}
       </AccountBookTemplate>
     </AccountBookProvider>
