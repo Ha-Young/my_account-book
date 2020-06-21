@@ -26,7 +26,7 @@ const categorys = [
 function accountBookReducer(state, action) {
   switch (action.type) {
     case 'CREATE':
-      return state.concat(action.accountBook);
+      return state.concat(action.newAccountBook);
     case 'REMOVE':
       return state.filter(accountBook => accountBook.id !== action.id);
     case 'UPDATE':

@@ -58,7 +58,13 @@ function AccountBookCreate() {
 
   const onToggle = () => setOpen(!open);
 
-  const onCreate = e => {
+  const onCreate = newAccountBook => {
+    console.log(newAccountBook);
+    dispatch({
+      type: 'CREATE',
+      newAccountBook: { ...newAccountBook, id: nextId.current },
+    });
+    nextId.current += 1;
     setOpen(false);
   };
 

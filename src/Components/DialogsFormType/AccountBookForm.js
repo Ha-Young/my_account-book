@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { useAccountBookCategory } from '../AccountBookContext';
 import MySelectBox from '../MySelectBox';
 import MyButton from '../MyButton';
+import { useRef } from 'react';
 
 const slideUp = keyframes`
   from {
@@ -45,20 +46,31 @@ const Input = styled.input`
 function AccountBookForm({ onConfirm, onCancel, create, update }) {
   const [textValue, setTextValue] = useState('');
   const [paymentValue, setPaymentValue] = useState(0);
+  const selectCategoryId = useRef(1);
+
   const textOnChange = e => setTextValue(e.target.value);
   const paymentOnChange = e => setPaymentValue(e.target.value);
 
   const categorys = useAccountBookCategory();
   const categorys_left = categorys.filter(category => category.id !== 0);
 
+  const onSelectedChange = selectId => {
+    selectCategoryId.current = selectId;
+  };
+
   const clickHandler = e => {
-    setTextValue('');
-    setPaymentValue(0);
     if (e.target.name === 'confirm') {
-      onConfirm();
+      const newAccountBook = {
+        title: textValue,
+        category: selectCategoryId.current,
+        amount: parseInt(paymentValue),
+      };
+      onConfirm(newAccountBook);
     } else {
       onCancel();
     }
+    setTextValue('');
+    setPaymentValue(0);
   };
 
   return (
@@ -71,13 +83,14 @@ function AccountBookForm({ onConfirm, onCancel, create, update }) {
       <h3>내용</h3>
       <Input autoFocus value={textValue} onChange={textOnChange} />
       <h3>금액</h3>
-      <Input value={paymentValue} onChange={paymentOnChange} />
+      <Input type="number" value={paymentValue} onChange={paymentOnChange} />
       <h3>카테고리</h3>
       <MySelectBox
         options={categorys_left}
         value={categorys_left[0]}
         selectBoxStyle={{ width: '100%', fontSize: '18px' }}
         listviewStyle={{ width: '100%' }}
+        onSelectedChange={onSelectedChange}
       />
       <ButtonGroup>
         <MyButton color="gray" name="cancel" onClick={clickHandler}>
