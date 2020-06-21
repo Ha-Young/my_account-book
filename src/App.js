@@ -29,8 +29,8 @@ function App() {
       <AccountBookTemplate>
         <AccountBookHead />
         <AccountBookSelectCategory />
-        {/* <AccountBookList />
-        <AccountBookCreate /> */}
+        <AccountBookList />
+        {/* <AccountBookCreate /> */}
       </AccountBookTemplate>
     </AccountBookProvider>
   );

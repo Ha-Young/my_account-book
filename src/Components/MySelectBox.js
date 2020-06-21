@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import { MdExpandMore } from 'react-icons/md';
 
@@ -26,6 +26,7 @@ const SelectBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  overflow-x: auto;
   ${props =>
     props.listview
       ? css`
@@ -73,9 +74,16 @@ const Option = styled.li`
   }
 `;
 
-function MySelectBox({ options, value, selectBoxStyle, listviewStyle }) {
+function MySelectBox({
+  options,
+  value,
+  selectBoxStyle,
+  listviewStyle,
+  onSelectedChange,
+}) {
   const [viewOption, setViewOption] = useState(false);
   const [selectedOption, setSelectedOption] = useState(value);
+  const prevSelectedId = useRef(selectedOption.id);
 
   const options_left = options
     ? options.filter(option => option.id !== selectedOption.id)
@@ -93,6 +101,10 @@ function MySelectBox({ options, value, selectBoxStyle, listviewStyle }) {
     );
     setSelectedOption(selectedOptions);
     toggleViewOption();
+    if (prevSelectedId !== selectedOptions.id) {
+      onSelectedChange(selectedOptions.id);
+      prevSelectedId.current = selectedOptions.id;
+    }
   };
 
   const viewStyle = viewOption ? listviewStyle : selectBoxStyle;
@@ -116,7 +128,7 @@ function MySelectBox({ options, value, selectBoxStyle, listviewStyle }) {
 
 MySelectBox.defaultProps = {
   selectBoxStyle: {
-    width: '50px',
+    width: 'auto',
     fontSize: '14px',
     fontWeight: '400',
   },

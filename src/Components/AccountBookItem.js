@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdCreate, MdDelete } from 'react-icons/md';
+import { useAccountBookCategory } from './AccountBookContext';
 
 const Category = styled.div`
   padding: 13px 20px;
@@ -56,7 +57,9 @@ const AccountBookItemBlock = styled.div`
   font-weight: bold;
 `;
 
-function AccountBookItem({ categorys, category, title, amount }) {
+function AccountBookItem({ category, title, amount }) {
+  const categorys = useAccountBookCategory();
+
   const categoryObj = categorys.find(
     categoryElement => categoryElement.id === category
   );

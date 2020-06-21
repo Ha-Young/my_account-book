@@ -1,4 +1,10 @@
-import React, { useReducer, createContext, useContext, useRef } from 'react';
+import React, {
+  useReducer,
+  createContext,
+  useState,
+  useContext,
+  useRef,
+} from 'react';
 
 const initialAccountBooks = [
   { id: 1, title: '용개반점', category: 1, amount: 7000 },
@@ -40,9 +46,12 @@ const AccountBookStateContext = createContext();
 const AccountBookDispatchContext = createContext();
 const AccountBookNextIdContext = createContext();
 const AccountBookCategoryContext = createContext();
+const AccountBookSelectCategoryContext = createContext();
+const AccountBookSetSelectCategoryContext = createContext();
 
 export function AccountBookProvider({ children }) {
   const [state, dispatch] = useReducer(accountBookReducer, initialAccountBooks);
+  const selectCategoryState = useState(0);
   const nextId = useRef(initialAccountBooks.length + 1);
 
   return (
@@ -50,7 +59,11 @@ export function AccountBookProvider({ children }) {
       <AccountBookDispatchContext.Provider value={dispatch}>
         <AccountBookNextIdContext.Provider value={nextId}>
           <AccountBookCategoryContext.Provider value={categorys}>
-            {children}
+            <AccountBookSelectCategoryContext.Provider
+              value={selectCategoryState}
+            >
+              {children}
+            </AccountBookSelectCategoryContext.Provider>
           </AccountBookCategoryContext.Provider>
         </AccountBookNextIdContext.Provider>
       </AccountBookDispatchContext.Provider>
@@ -86,6 +99,14 @@ export function useAccountBookCategory() {
   const context = useContext(AccountBookCategoryContext);
   if (!context) {
     throw new Error('Cannot find AccountBookCategoryContext Provider');
+  }
+  return context;
+}
+
+export function useAccountBookSelectedCategory() {
+  const context = useContext(AccountBookSelectCategoryContext);
+  if (!context) {
+    throw new Error('Cannot find AccountBookSelectCategoryContext Provider');
   }
   return context;
 }

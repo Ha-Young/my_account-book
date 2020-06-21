@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import MySelectBox from './MySelectBox';
-import { useAccountBookCategory } from './AccountBookContext';
+import {
+  useAccountBookCategory,
+  useAccountBookSelectedCategory,
+} from './AccountBookContext';
 
 const AccountBookSelectCategoryBlock = styled.div`
   display: flex;
@@ -19,11 +22,22 @@ const AccountBookSelectCategoryBlock = styled.div`
 
 function AccountBookSelectCategory() {
   const categorys = useAccountBookCategory();
+  const [selectCategory, setSelectCategory] = useAccountBookSelectedCategory();
+
+  const onSelectedChange = selectId => {
+    setSelectCategory(selectId);
+  };
 
   return (
     <AccountBookSelectCategoryBlock>
       <span>카테고리별로 보기:</span>
-      {categorys && <MySelectBox options={categorys} value={categorys[0]} />}
+      {categorys && (
+        <MySelectBox
+          options={categorys}
+          value={categorys[0]}
+          onSelectedChange={onSelectedChange}
+        />
+      )}
     </AccountBookSelectCategoryBlock>
   );
 }
