@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { useAccountBookState } from './AccountBookContext';
 
 const AccountBookHeadBlock = styled.div`
   border-bottom: 1px solid #adb5bd;
@@ -34,13 +35,27 @@ const PaymentNum = styled.span`
 `;
 
 function AccountBookHead() {
+  const accountBooks = useAccountBookState();
+  const allPayment = accountBooks.reduce(
+    (accumulator, accountBook) => accumulator + accountBook.amount,
+    0
+  );
+
+  const dateString = new Date().toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
   return (
     <AccountBookHeadBlock>
       <h1>오늘의 지출</h1>
-      <div className="date">2020년 6월 20일</div>
+      <div className="date">{dateString}</div>
       <div className="all-payment">
         총 지출:
-        <PaymentNum isMinus={false}>0 원</PaymentNum>
+        <PaymentNum isMinus={allPayment !== 0}>
+          {allPayment !== 0 ? `-${allPayment}` : allPayment} 원
+        </PaymentNum>
       </div>
     </AccountBookHeadBlock>
   );

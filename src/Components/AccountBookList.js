@@ -14,8 +14,8 @@ function AccountBoodList({ categorys }) {
       <AccountBookItem
         categorys={categorys}
         category={1}
-        text="용개반점"
-        payment="7000"
+        title="용개반점"
+        amount="7000"
       />
     </AccountBoodListBlock>
   );

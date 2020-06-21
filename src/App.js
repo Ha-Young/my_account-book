@@ -3,8 +3,9 @@ import { createGlobalStyle } from 'styled-components';
 import AccountBookTemplate from './Components/AccountBookTemplate';
 import AccountBookHead from './Components/AccountBookHead';
 import AccountBookSelectCategory from './Components/AccountBookSelectCategory';
-import AccountBoodList from './Components/AccountBoodList';
+import AccountBookList from './Components/AccountBookList';
 import AccountBookCreate from './Components/AccountBookCreate';
+import { AccountBookProvider } from './Components/AccountBookContext';
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -23,15 +24,15 @@ const categorys = [
 
 function App() {
   return (
-    <>
+    <AccountBookProvider>
       <GlobalStyle />
       <AccountBookTemplate>
         <AccountBookHead />
-        <AccountBookSelectCategory categorys={categorys} />
-        <AccountBoodList categorys={categorys} />
-        <AccountBookCreate />
+        {/* <AccountBookSelectCategory />
+        <AccountBookList />
+        <AccountBookCreate /> */}
       </AccountBookTemplate>
-    </>
+    </AccountBookProvider>
   );
 }
 

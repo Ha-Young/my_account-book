@@ -56,7 +56,7 @@ const AccountBookItemBlock = styled.div`
   font-weight: bold;
 `;
 
-function AccountBookItem({ categorys, category, text, payment }) {
+function AccountBookItem({ categorys, category, title, amount }) {
   const categoryObj = categorys.find(
     categoryElement => categoryElement.id === category
   );
@@ -64,8 +64,8 @@ function AccountBookItem({ categorys, category, text, payment }) {
   return (
     <AccountBookItemBlock>
       <Category color={categoryObj.color}>{categoryObj.text}</Category>
-      <Text>{text}</Text>
-      <Payment>{payment !== 0 ? '-' + payment : '0'} 원</Payment>
+      <Text>{title}</Text>
+      <Payment>{amount !== 0 ? '-' + amount : '0'} 원</Payment>
       <Update>
         <MdCreate />
       </Update>

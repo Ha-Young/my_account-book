@@ -118,24 +118,40 @@ const Input = styled.input`
   margin-bottom: 20px;
 `;
 
-function AccountBookCreate() {
+function AccountBookCreate({ categorys }) {
   const [open, setOpen] = useState(false);
   const [textValue, setTextValue] = useState('');
   const [paymentValue, setPaymentValue] = useState(0);
   const onToggle = () => setOpen(!open);
+  const textOnChange = e => setTextValue(e.target.value);
+  const paymentOnChange = e => setPaymentValue(e.target.value);
+  const onSubmit = e => {
+    e.preventDefault();
+    console.log('submit');
+    setTextValue('');
+    setPaymentValue('');
+    setOpen(false);
+  };
+  const categorys_left = categorys.filter(category => category.id !== 0);
+  console.log(categorys_left);
 
   return (
     <>
       {open && (
         <InsertFormPositioner>
-          <InsertForm>
+          <InsertForm onSubmit={onSubmit}>
             <h2>지출등록</h2>
             <h3>내용</h3>
-            <Input autoFocus value={textValue} />
+            <Input autoFocus value={textValue} onChange={textOnChange} />
             <h3>금액</h3>
-            <Input value={paymentValue} />
+            <Input value={paymentValue} onChange={paymentOnChange} />
             <h3>카테고리</h3>
-            <MySelectBox />
+            <MySelectBox
+              options={categorys_left}
+              value={categorys_left[0]}
+              selectBoxStyle={{ width: '100%', fontSize: '18px' }}
+              listviewStyle={{ width: '100%' }}
+            />
             <ButtonGroup>
               <MyButton color="gray">취소</MyButton>
               <MyButton>등록</MyButton>

@@ -10,13 +10,17 @@ const AccountBookSelectCategoryBlock = styled.div`
   padding: 15px 0px;
   font-size: 21px;
   font-weight: bold;
+
+  span {
+    margin-right: 10px;
+  }
 `;
 
 function AccountBookSelectCategory({ categorys }) {
   return (
     <AccountBookSelectCategoryBlock>
-      카테고리별로 보기:
-      <MySelectBox options={categorys} value={categorys[0]} />
+      <span>카테고리별로 보기:</span>
+      {categorys && <MySelectBox options={categorys} value={categorys[0]} />}
     </AccountBookSelectCategoryBlock>
   );
 }

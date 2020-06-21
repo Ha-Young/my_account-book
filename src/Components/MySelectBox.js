@@ -9,10 +9,6 @@ const MySelectBoxBlock = styled.div`
   align-items: space-around;
   border: 1px solid #adb5bd;
   border-radius: 3px;
-  margin-left: 10px;
-
-  font-size: 14px;
-  font-weight: 400;
 
   overflow: auto;
 
@@ -49,7 +45,6 @@ const SelectBox = styled.div`
 `;
 
 const OptionList = styled.ul`
-  font-size: 14px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -81,9 +76,12 @@ const Option = styled.li`
 function MySelectBox({ options, value, selectBoxStyle, listviewStyle }) {
   const [viewOption, setViewOption] = useState(false);
   const [selectedOption, setSelectedOption] = useState(value);
-  const options_left = options.filter(
-    option => option.id !== selectedOption.id
-  );
+
+  const options_left = options
+    ? options.filter(option => option.id !== selectedOption.id)
+    : null;
+
+  if (options_left == null) return null;
 
   const toggleViewOption = () => {
     setViewOption(!viewOption);
@@ -119,9 +117,13 @@ function MySelectBox({ options, value, selectBoxStyle, listviewStyle }) {
 MySelectBox.defaultProps = {
   selectBoxStyle: {
     width: '50px',
+    fontSize: '14px',
+    fontWeight: '400',
   },
   listviewStyle: {
     width: '70px',
+    fontSize: '14px',
+    fontWeight: '400',
   },
 };
 
