@@ -34,10 +34,10 @@ function ConfirmForm({ text, onConfirm, onCancel }) {
     <ConfirmFormBlock>
       <h2>{text}</h2>
       <ButtonGroup>
-        <MyButton color="gray" name="cancel" onClick={onConfirm}>
+        <MyButton color="gray" name="cancel" onClick={onCancel}>
           취소
         </MyButton>
-        <MyButton color="#f03e3e" name="confirm" onClick={onCancel}>
+        <MyButton color="#f03e3e" name="confirm" onClick={onConfirm}>
           삭제
         </MyButton>
       </ButtonGroup>

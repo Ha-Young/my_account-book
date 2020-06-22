@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MdCreate, MdDelete } from 'react-icons/md';
-import { useAccountBookCategory } from './AccountBookContext';
+import {
+  useAccountBookCategory,
+  useAccountBookDispatch,
+} from './AccountBookContext';
+import MyDialog from './MyDialog';
 
 const Category = styled.div`
   padding: 13px 20px;
@@ -57,25 +61,68 @@ const AccountBookItemBlock = styled.div`
   font-weight: bold;
 `;
 
-function AccountBookItem({ category, title, amount }) {
+function AccountBookItem({ id, title, amount, category }) {
   const categorys = useAccountBookCategory();
 
   const categoryObj = categorys.find(
     categoryElement => categoryElement.id === category
   );
 
+  const [removeOpen, setRemoveOpen] = useState(false);
+  const [updateOpen, setUpdateOpen] = useState(false);
+  const dispatch = useAccountBookDispatch();
+
+  const onRemoveClick = () => setRemoveOpen(!removeOpen);
+  const onUpdateClick = () => setUpdateOpen(!updateOpen);
+
+  const onRemoveConfirm = () => {
+    dispatch({ type: 'REMOVE', id });
+    setRemoveOpen(false);
+  };
+
+  const onRemoveCancel = () => {
+    setRemoveOpen(false);
+  };
+
+  const onUpdateConfirm = updatedAccountBook => {
+    updatedAccountBook = { id, ...updatedAccountBook };
+    dispatch({ type: 'UPDATE', updatedAccountBook });
+    setUpdateOpen(false);
+  };
+
+  const onUpdateCancel = () => {
+    setUpdateOpen(false);
+  };
+
   return (
-    <AccountBookItemBlock>
-      <Category color={categoryObj.color}>{categoryObj.text}</Category>
-      <Text>{title}</Text>
-      <Payment>{amount !== 0 ? '-' + amount : '0'} 원</Payment>
-      <Update>
-        <MdCreate />
-      </Update>
-      <Remove>
-        <MdDelete />
-      </Remove>
-    </AccountBookItemBlock>
+    <>
+      {removeOpen && (
+        <MyDialog
+          type="remove"
+          onConfirm={onRemoveConfirm}
+          onCancel={onRemoveCancel}
+        />
+      )}
+      {updateOpen && (
+        <MyDialog
+          type="update"
+          onConfirm={onUpdateConfirm}
+          onCancel={onUpdateCancel}
+          updateObj={{ id, title, amount, category }}
+        />
+      )}
+      <AccountBookItemBlock>
+        <Category color={categoryObj.color}>{categoryObj.text}</Category>
+        <Text>{title}</Text>
+        <Payment>{amount !== 0 ? '-' + amount : '0'} 원</Payment>
+        <Update onClick={onUpdateClick}>
+          <MdCreate />
+        </Update>
+        <Remove onClick={onRemoveClick}>
+          <MdDelete />
+        </Remove>
+      </AccountBookItemBlock>
+    </>
   );
 }
 

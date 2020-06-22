@@ -4,6 +4,7 @@ import { useAccountBookCategory } from '../AccountBookContext';
 import MySelectBox from '../MySelectBox';
 import MyButton from '../MyButton';
 import { useRef } from 'react';
+import useInputs from '../useInputs';
 
 const slideUp = keyframes`
   from {
@@ -43,16 +44,23 @@ const Input = styled.input`
   margin-bottom: 20px;
 `;
 
-function AccountBookForm({ onConfirm, onCancel, create, update }) {
-  const [textValue, setTextValue] = useState('');
-  const [paymentValue, setPaymentValue] = useState(0);
-  const selectCategoryId = useRef(1);
-
-  const textOnChange = e => setTextValue(e.target.value);
-  const paymentOnChange = e => setPaymentValue(e.target.value);
-
+function AccountBookForm({ onConfirm, onCancel, create, update, updateObj }) {
   const categorys = useAccountBookCategory();
   const categorys_left = categorys.filter(category => category.id !== 0);
+
+  const initialText = updateObj ? updateObj.title : '';
+  const initialPayment = updateObj ? parseInt(updateObj.amount) : 0;
+  const initialCategory = updateObj
+    ? categorys_left.find(category => category.id === updateObj.category)
+    : categorys_left[0];
+
+  const selectCategoryId = useRef(1);
+
+  const [form, onChange, reset] = useInputs({
+    title: initialText,
+    payment: initialPayment,
+  });
+  const { title, payment } = form;
 
   const onSelectedChange = selectId => {
     selectCategoryId.current = selectId;
@@ -61,16 +69,15 @@ function AccountBookForm({ onConfirm, onCancel, create, update }) {
   const clickHandler = e => {
     if (e.target.name === 'confirm') {
       const newAccountBook = {
-        title: textValue,
+        title,
         category: selectCategoryId.current,
-        amount: parseInt(paymentValue),
+        amount: parseInt(payment),
       };
       onConfirm(newAccountBook);
     } else {
       onCancel();
     }
-    setTextValue('');
-    setPaymentValue(0);
+    reset();
   };
 
   return (
@@ -81,13 +88,13 @@ function AccountBookForm({ onConfirm, onCancel, create, update }) {
         {update && ' 수정'}
       </h2>
       <h3>내용</h3>
-      <Input autoFocus value={textValue} onChange={textOnChange} />
+      <Input autoFocus value={title} onChange={onChange} />
       <h3>금액</h3>
-      <Input type="number" value={paymentValue} onChange={paymentOnChange} />
+      <Input type="number" value={payment} onChange={onChange} />
       <h3>카테고리</h3>
       <MySelectBox
         options={categorys_left}
-        value={categorys_left[0]}
+        value={initialCategory}
         selectBoxStyle={{ width: '100%', fontSize: '18px' }}
         listviewStyle={{ width: '100%' }}
         onSelectedChange={onSelectedChange}

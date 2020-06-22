@@ -30,6 +30,7 @@ function accountBookReducer(state, action) {
     case 'REMOVE':
       return state.filter(accountBook => accountBook.id !== action.id);
     case 'UPDATE':
+      console.log(action);
       return state.map(accountBook =>
         accountBook.id === action.updatedAccountBook.id
           ? action.updatedAccountBook

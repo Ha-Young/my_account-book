@@ -36,14 +36,19 @@ const MyDialogBlock = styled.div`
   animation-fill-mode: forwards;
 `;
 
-function MyDialog({ type, onConfirm, onCancel }) {
+function MyDialog({ type, onConfirm, onCancel, updateObj }) {
   return (
     <MyDialogBlock>
       {type === 'create' && (
         <AccountBookForm create onConfirm={onConfirm} onCancel={onCancel} />
       )}
       {type === 'update' && (
-        <AccountBookForm update onConfirm={onConfirm} onCancel={onCancel} />
+        <AccountBookForm
+          update
+          updateObj={updateObj}
+          onConfirm={onConfirm}
+          onCancel={onCancel}
+        />
       )}
       {type === 'remove' && (
         <ConfirmForm
