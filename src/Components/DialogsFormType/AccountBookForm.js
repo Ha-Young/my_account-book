@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useAccountBookCategory } from '../AccountBookContext';
 import MySelectBox from '../MySelectBox';
@@ -62,23 +62,29 @@ function AccountBookForm({ onConfirm, onCancel, create, update, updateObj }) {
   });
   const { title, payment } = form;
 
-  const onSelectedChange = selectId => {
-    selectCategoryId.current = selectId;
-  };
+  const onSelectedChange = useCallback(
+    selectId => {
+      selectCategoryId.current = selectId;
+    },
+    [selectCategoryId]
+  );
 
-  const clickHandler = e => {
-    if (e.target.name === 'confirm') {
-      const newAccountBook = {
-        title,
-        category: selectCategoryId.current,
-        amount: parseInt(payment),
-      };
-      onConfirm(newAccountBook);
-    } else {
-      onCancel();
-    }
-    reset();
-  };
+  const clickHandler = useCallback(
+    e => {
+      if (e.target.name === 'confirm') {
+        const newAccountBook = {
+          title,
+          category: selectCategoryId.current,
+          amount: parseInt(payment),
+        };
+        onConfirm(newAccountBook);
+      } else {
+        onCancel();
+      }
+      reset();
+    },
+    [onCancel, onConfirm, payment, reset, title]
+  );
 
   return (
     <AccountBookFormBlock>
@@ -112,4 +118,4 @@ function AccountBookForm({ onConfirm, onCancel, create, update, updateObj }) {
   );
 }
 
-export default AccountBookForm;
+export default React.useMemo(AccountBookForm);

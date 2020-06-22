@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { MdCreate, MdDelete } from 'react-icons/md';
 import {
@@ -64,35 +64,42 @@ const AccountBookItemBlock = styled.div`
 function AccountBookItem({ id, title, amount, category }) {
   const categorys = useAccountBookCategory();
 
-  const categoryObj = categorys.find(
-    categoryElement => categoryElement.id === category
+  const categoryObj = useCallback(
+    categorys.find(categoryElement => categoryElement.id === category)
   );
 
   const [removeOpen, setRemoveOpen] = useState(false);
   const [updateOpen, setUpdateOpen] = useState(false);
   const dispatch = useAccountBookDispatch();
 
-  const onRemoveClick = () => setRemoveOpen(!removeOpen);
-  const onUpdateClick = () => setUpdateOpen(!updateOpen);
+  const onRemoveClick = useCallback(() => setRemoveOpen(!removeOpen), [
+    removeOpen,
+  ]);
+  const onUpdateClick = useCallback(() => setUpdateOpen(!updateOpen), [
+    updateOpen,
+  ]);
 
-  const onRemoveConfirm = () => {
+  const onRemoveConfirm = useCallback(() => {
     dispatch({ type: 'REMOVE', id });
     setRemoveOpen(false);
-  };
+  }, [id, dispatch]);
 
-  const onRemoveCancel = () => {
+  const onRemoveCancel = useCallback(() => {
     setRemoveOpen(false);
-  };
+  }, []);
 
-  const onUpdateConfirm = updatedAccountBook => {
-    updatedAccountBook = { id, ...updatedAccountBook };
-    dispatch({ type: 'UPDATE', updatedAccountBook });
-    setUpdateOpen(false);
-  };
+  const onUpdateConfirm = useCallback(
+    updatedAccountBook => {
+      updatedAccountBook = { id, ...updatedAccountBook };
+      dispatch({ type: 'UPDATE', updatedAccountBook });
+      setUpdateOpen(false);
+    },
+    [id, dispatch]
+  );
 
-  const onUpdateCancel = () => {
+  const onUpdateCancel = useCallback(() => {
     setUpdateOpen(false);
-  };
+  }, []);
 
   return (
     <>
@@ -126,4 +133,4 @@ function AccountBookItem({ id, title, amount, category }) {
   );
 }
 
-export default AccountBookItem;
+export default React.useMemo(AccountBookItem);

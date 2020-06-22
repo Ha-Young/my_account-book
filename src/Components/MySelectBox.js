@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { MdExpandMore } from 'react-icons/md';
 
@@ -91,6 +91,7 @@ function MySelectBox({
 
   if (options_left == null) return null;
 
+  // 여긴 왜 useCallback을 쓰면 애러가 날까
   const toggleViewOption = () => {
     setViewOption(!viewOption);
   };

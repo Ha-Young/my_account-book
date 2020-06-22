@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import AccountBookItem from './AccountBookItem';
 import {
   useAccountBookState,
   useAccountBookSelectedCategory,
-  useAccountBookDispatch,
 } from './AccountBookContext';
-import MyDialog from './MyDialog';
 
 const AccountBookListBlock = styled.div`
   flex: 1;

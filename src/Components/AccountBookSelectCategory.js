@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import MySelectBox from './MySelectBox';
 import {
@@ -24,9 +24,12 @@ function AccountBookSelectCategory() {
   const categorys = useAccountBookCategory();
   const [_, setSelectCategory] = useAccountBookSelectedCategory();
 
-  const onSelectedChange = selectId => {
-    setSelectCategory(selectId);
-  };
+  const onSelectedChange = useCallback(
+    selectId => {
+      setSelectCategory(selectId);
+    },
+    [setSelectCategory]
+  );
 
   return (
     <AccountBookSelectCategoryBlock>

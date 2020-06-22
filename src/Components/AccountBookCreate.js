@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import {
@@ -56,21 +56,23 @@ function AccountBookCreate() {
   const dispatch = useAccountBookDispatch();
   const nextId = useAccountBookNextId();
 
-  const onToggle = () => setOpen(!open);
+  const onToggle = useCallback(() => setOpen(!open), [open]);
 
-  const onCreate = newAccountBook => {
-    console.log(newAccountBook);
-    dispatch({
-      type: 'CREATE',
-      newAccountBook: { ...newAccountBook, id: nextId.current },
-    });
-    nextId.current += 1;
-    setOpen(false);
-  };
+  const onCreate = useCallback(
+    newAccountBook => {
+      dispatch({
+        type: 'CREATE',
+        newAccountBook: { ...newAccountBook, id: nextId.current },
+      });
+      nextId.current += 1;
+      setOpen(false);
+    },
+    [dispatch, nextId]
+  );
 
-  const onCancel = () => {
+  const onCancel = useCallback(() => {
     setOpen(false);
-  };
+  }, []);
 
   return (
     <>
@@ -88,4 +90,4 @@ function AccountBookCreate() {
   );
 }
 
-export default AccountBookCreate;
+export default React.useMemo(AccountBookCreate);
