@@ -1,4 +1,4 @@
-# 지출 기록부 만들기
+# 지출 기록부 만들기. 
 
 **이 프로젝트는 Fastcampus의 Byte Degree Program 수강생을 대상으로 마련된 과제입니다.**
 
