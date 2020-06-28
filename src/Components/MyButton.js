@@ -64,7 +64,9 @@ const fullWidthStyle = css`
 
 const StyledButton = styled.button`
   /* 공통 스타일 */
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   outline: none;
   border: none;
   border-radius: 4px;
@@ -107,4 +109,4 @@ MyButton.defaultProps = {
   size: 'medium',
 };
 
-export default MyButton;
+export default React.memo(MyButton);

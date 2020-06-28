@@ -89,12 +89,11 @@ function MySelectBox({
     ? options.filter(option => option.id !== selectedOption.id)
     : null;
 
-  if (options_left == null) return null;
-
-  // 여긴 왜 useCallback을 쓰면 애러가 날까
-  const toggleViewOption = () => {
+  const toggleViewOption = useCallback(() => {
     setViewOption(!viewOption);
-  };
+  }, [viewOption]);
+
+  if (options_left == null) return null;
 
   const selectOption = e => {
     const selectedOptions = options.find(
@@ -140,4 +139,4 @@ MySelectBox.defaultProps = {
   },
 };
 
-export default MySelectBox;
+export default React.memo(MySelectBox);

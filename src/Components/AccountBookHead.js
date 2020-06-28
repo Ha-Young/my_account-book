@@ -53,12 +53,10 @@ function AccountBookHead() {
       <div className="date">{dateString}</div>
       <div className="all-payment">
         총 지출:
-        <PaymentNum isMinus={allPayment !== 0}>
-          {allPayment !== 0 ? `-${allPayment}` : allPayment} 원
-        </PaymentNum>
+        <PaymentNum isMinus={allPayment !== 0}>{allPayment * -1} 원</PaymentNum>
       </div>
     </AccountBookHeadBlock>
   );
 }
 
-export default AccountBookHead;
+export default React.memo(AccountBookHead);

@@ -7,20 +7,11 @@ import React, {
 } from 'react';
 
 const initialAccountBooks = [
-  { id: 1, title: '용개반점', category: 1, amount: 7000 },
-  { id: 2, title: '양배추', category: 2, amount: 5000 },
-  { id: 3, title: '택시비', category: 3, amount: 20000 },
-  { id: 4, title: '관리비', category: 4, amount: 100000 },
-  { id: 5, title: '병원진료', category: 5, amount: 7000 },
-];
-
-const categorys = [
-  { id: 0, text: '전체', color: '#e7f5ff' },
-  { id: 1, text: '식사', color: '#ffec99' },
-  { id: 2, text: '식료품', color: '#d8f5a2' },
-  { id: 3, text: '교통', color: '#ffc078' },
-  { id: 4, text: '생활', color: '#da77f2' },
-  { id: 5, text: '의료', color: '#4dabf7' },
+  // { id: 1, title: '용개반점', category: 1, amount: 7000 },
+  // { id: 2, title: '양배추', category: 2, amount: 5000 },
+  // { id: 3, title: '택시비', category: 3, amount: 20000 },
+  // { id: 4, title: '관리비', category: 4, amount: 100000 },
+  // { id: 5, title: '병원진료', category: 5, amount: 7000 },
 ];
 
 function accountBookReducer(state, action) {
@@ -46,7 +37,6 @@ function accountBookReducer(state, action) {
 const AccountBookStateContext = createContext();
 const AccountBookDispatchContext = createContext();
 const AccountBookNextIdContext = createContext();
-const AccountBookCategoryContext = createContext();
 const AccountBookSelectCategoryContext = createContext();
 
 export function AccountBookProvider({ children }) {
@@ -58,13 +48,11 @@ export function AccountBookProvider({ children }) {
     <AccountBookStateContext.Provider value={state}>
       <AccountBookDispatchContext.Provider value={dispatch}>
         <AccountBookNextIdContext.Provider value={nextId}>
-          <AccountBookCategoryContext.Provider value={categorys}>
-            <AccountBookSelectCategoryContext.Provider
-              value={selectCategoryState}
-            >
-              {children}
-            </AccountBookSelectCategoryContext.Provider>
-          </AccountBookCategoryContext.Provider>
+          <AccountBookSelectCategoryContext.Provider
+            value={selectCategoryState}
+          >
+            {children}
+          </AccountBookSelectCategoryContext.Provider>
         </AccountBookNextIdContext.Provider>
       </AccountBookDispatchContext.Provider>
     </AccountBookStateContext.Provider>
@@ -91,14 +79,6 @@ export function useAccountBookNextId() {
   const context = useContext(AccountBookNextIdContext);
   if (!context) {
     throw new Error('Cannot find AccountBookNextIdContext Provider');
-  }
-  return context;
-}
-
-export function useAccountBookCategory() {
-  const context = useContext(AccountBookCategoryContext);
-  if (!context) {
-    throw new Error('Cannot find AccountBookCategoryContext Provider');
   }
   return context;
 }

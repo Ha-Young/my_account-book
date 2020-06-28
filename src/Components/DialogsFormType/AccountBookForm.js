@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { useAccountBookCategory } from '../AccountBookContext';
+import { categorys } from '../../StaticDatas/staticDatas';
 import MySelectBox from '../MySelectBox';
 import MyButton from '../MyButton';
 import { useRef } from 'react';
@@ -45,7 +45,6 @@ const Input = styled.input`
 `;
 
 function AccountBookForm({ onConfirm, onCancel, create, update, updateObj }) {
-  const categorys = useAccountBookCategory();
   const categorys_left = categorys.filter(category => category.id !== 0);
 
   const initialText = updateObj ? updateObj.title : '';
@@ -94,9 +93,9 @@ function AccountBookForm({ onConfirm, onCancel, create, update, updateObj }) {
         {update && ' 수정'}
       </h2>
       <h3>내용</h3>
-      <Input autoFocus value={title} onChange={onChange} />
+      <Input autoFocus name="title" value={title} onChange={onChange} />
       <h3>금액</h3>
-      <Input type="number" value={payment} onChange={onChange} />
+      <Input type="number" name="payment" value={payment} onChange={onChange} />
       <h3>카테고리</h3>
       <MySelectBox
         options={categorys_left}
@@ -118,4 +117,4 @@ function AccountBookForm({ onConfirm, onCancel, create, update, updateObj }) {
   );
 }
 
-export default React.useMemo(AccountBookForm);
+export default AccountBookForm;

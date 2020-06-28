@@ -1,11 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { MdCreate, MdDelete } from 'react-icons/md';
-import {
-  useAccountBookCategory,
-  useAccountBookDispatch,
-} from './AccountBookContext';
+import { useAccountBookDispatch } from './AccountBookContext';
 import MyDialog from './MyDialog';
+import { categorys } from '../StaticDatas/staticDatas';
 
 const Category = styled.div`
   padding: 13px 20px;
@@ -62,8 +60,6 @@ const AccountBookItemBlock = styled.div`
 `;
 
 function AccountBookItem({ id, title, amount, category }) {
-  const categorys = useAccountBookCategory();
-
   const categoryObj = useCallback(
     categorys.find(categoryElement => categoryElement.id === category)
   );
@@ -133,4 +129,4 @@ function AccountBookItem({ id, title, amount, category }) {
   );
 }
 
-export default React.useMemo(AccountBookItem);
+export default React.memo(AccountBookItem);

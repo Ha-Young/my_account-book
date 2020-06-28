@@ -1,10 +1,8 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import MySelectBox from './MySelectBox';
-import {
-  useAccountBookCategory,
-  useAccountBookSelectedCategory,
-} from './AccountBookContext';
+import { useAccountBookSelectedCategory } from './AccountBookContext';
+import { categorys } from '../StaticDatas/staticDatas';
 
 const AccountBookSelectCategoryBlock = styled.div`
   display: flex;
@@ -21,7 +19,6 @@ const AccountBookSelectCategoryBlock = styled.div`
 `;
 
 function AccountBookSelectCategory() {
-  const categorys = useAccountBookCategory();
   const [_, setSelectCategory] = useAccountBookSelectedCategory();
 
   const onSelectedChange = useCallback(
@@ -45,4 +42,4 @@ function AccountBookSelectCategory() {
   );
 }
 
-export default AccountBookSelectCategory;
+export default React.memo(AccountBookSelectCategory);

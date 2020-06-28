@@ -24,4 +24,4 @@ function AccountBookTemplate({ children }) {
   return <AccountBookTemplateBlock>{children}</AccountBookTemplateBlock>;
 }
 
-export default AccountBookTemplate;
+export default React.memo(AccountBookTemplate);

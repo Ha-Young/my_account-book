@@ -90,4 +90,4 @@ function AccountBookCreate() {
   );
 }
 
-export default React.useMemo(AccountBookCreate);
+export default React.memo(AccountBookCreate);

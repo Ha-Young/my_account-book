@@ -1,4 +1,4 @@
-import { useCallback, useReducer } from 'react';
+import React, { useCallback, useReducer } from 'react';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -40,4 +40,4 @@ function useInputs(initialForm) {
   return [form, onChange, reset];
 }
 
-export default useInputs;
+export default React.memo(useInputs);

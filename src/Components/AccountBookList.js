@@ -38,4 +38,4 @@ function AccountBookList() {
   );
 }
 
-export default AccountBookList;
+export default React.memo(AccountBookList);

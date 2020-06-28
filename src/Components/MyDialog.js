@@ -61,4 +61,4 @@ function MyDialog({ type, onConfirm, onCancel, updateObj }) {
   );
 }
 
-export default MyDialog;
+export default React.memo(MyDialog);
