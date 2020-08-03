@@ -40,4 +40,4 @@ function useInputs(initialForm) {
   return [form, onChange, reset];
 }
 
-export default React.memo(useInputs);
+export default useInputs;

@@ -59,6 +59,7 @@ function AccountBookForm({ onConfirm, onCancel, create, update, updateObj }) {
     title: initialText,
     payment: initialPayment,
   });
+
   const { title, payment } = form;
 
   const onSelectedChange = useCallback(
