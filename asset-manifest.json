@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/my_account-book/static/js/main.e149d464.chunk.js",
-    "main.js.map": "/my_account-book/static/js/main.e149d464.chunk.js.map",
+    "main.js": "/my_account-book/static/js/main.243ad123.chunk.js",
+    "main.js.map": "/my_account-book/static/js/main.243ad123.chunk.js.map",
     "runtime-main.js": "/my_account-book/static/js/runtime-main.b07e65a6.js",
     "runtime-main.js.map": "/my_account-book/static/js/runtime-main.b07e65a6.js.map",
     "static/js/2.fa0e68bc.chunk.js": "/my_account-book/static/js/2.fa0e68bc.chunk.js",
     "static/js/2.fa0e68bc.chunk.js.map": "/my_account-book/static/js/2.fa0e68bc.chunk.js.map",
     "index.html": "/my_account-book/index.html",
-    "precache-manifest.21628d9a66c31c9bdb4da4ff48efaa27.js": "/my_account-book/precache-manifest.21628d9a66c31c9bdb4da4ff48efaa27.js",
+    "precache-manifest.2a694e6fbef63b52ba0de0fd871f0c0a.js": "/my_account-book/precache-manifest.2a694e6fbef63b52ba0de0fd871f0c0a.js",
     "service-worker.js": "/my_account-book/service-worker.js",
     "static/js/2.fa0e68bc.chunk.js.LICENSE.txt": "/my_account-book/static/js/2.fa0e68bc.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b07e65a6.js",
     "static/js/2.fa0e68bc.chunk.js",
-    "static/js/main.e149d464.chunk.js"
+    "static/js/main.243ad123.chunk.js"
   ]
 }
