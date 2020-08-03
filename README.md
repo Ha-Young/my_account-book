@@ -2,6 +2,9 @@
 
 **이 프로젝트는 연습으로 만들어 본 프로잭트 과제입니다.**
 
+## deploy
+[ghPage](http:/Ha-Young.github.io/my_account-book)
+
 ## 프로젝트 소개
 
 리액트의 기초를 익히고 Todo list 애플리케이션까지 구현해본 여러분들에게  
